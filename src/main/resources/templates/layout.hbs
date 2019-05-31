@@ -12,8 +12,37 @@
         <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="/">Home</a></li>
+        <li role="presentation"><a href="/">Add Engineer</a></li>
+        <li role="presentation"><a href="/posts/new">Allocate Site</a></li>
+        <li role="presentation"><a href="/posts/new">Update Site Details</a></li>
+        <li role="presentation"><a href="/posts/new">Delete Engineer</a></li>
+        <li role="presentation"><a href="/posts/new">Delete Site</a></li>
+        <li role="presentation"><a href="/posts/new">Add a New Department Detail</a></li>
+        <li role="presentation"><a href="/posts/new">Add a New Department Detail</a></li>
+    </ul>
 {{/block}}
-<div class="page">
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-2">
+            Field Manager
+        </div>
+        <div class="col-md-4">
+            <h1>Site Maintenance Manager</h1>
+            <small><em>For seamless field management!</em></small>
+            </div>
+        <div class="col-md-5" id="login">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Username" name="username">
+                <input type="text" placeholder="Password" name="psw">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 {{#block "content"}}
 
 {{/block}}
