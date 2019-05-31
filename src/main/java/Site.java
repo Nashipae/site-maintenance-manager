@@ -1,4 +1,3 @@
-import java.sql.Connection;
 import java.time.LocalDateTime;
 import org.sql2o.Connection;
 import java.util.ArrayList;
