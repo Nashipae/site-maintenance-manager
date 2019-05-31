@@ -1,8 +1,10 @@
 import java.sql.Connection;
 import java.time.LocalDateTime;
+import org.sql2o.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import org.sql2o.*;
+
 
 public class Site {
     private int id;
@@ -68,7 +70,7 @@ public class Site {
         return name;
     }
 
-    public boolean decommissioned() {
+    public boolean isDecommissioned() {
         return decommissioned;
     }
 
