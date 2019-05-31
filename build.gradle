@@ -8,9 +8,10 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+
+mainClassName = 'App'
 archivesBaseName = "Site-Maintenance-Manager"
 applicationName = "Site-Maintenance-Manager"
-mainClassName = 'App'
 
 repositories {
     mavenCentral()

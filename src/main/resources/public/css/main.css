@@ -1,0 +1,41 @@
+body{
+    color:white;
+    font-family: 'Playfair Display', serif;
+    background-color:rgba(22, 51, 56,0.9)
+}
+
+.saleHunter{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+}
+
+.login-container {
+    float: right;
+    margin-top:30px;
+}
+.login-container button {
+    float: right;
+    padding: 6px 10px;
+    /*margin-top: 30px;*/
+    margin-right: 16px;
+    background-color: crimson;
+    color: white;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    height:26px;
+}
+.dashboard{
+    grid-row: span 2 / auto;
+    height:505px;
+    width:400px;
+    background-color:#163338;
+    margin-top:30px;
+}
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-size: cover;
+}

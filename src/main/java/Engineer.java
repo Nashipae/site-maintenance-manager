@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.ArrayList;
 import org.sql2o.*;
 
-import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.details;
 
 public class Engineer{
     private int id;
