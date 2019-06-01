@@ -1,1 +1,1 @@
-web: ./build/install/Site-Maintenance-Manager/bin/Site-Maintenance-Manager
+web: ./build/install/site-maintenance-manager/bin/site-maintenance-manager
