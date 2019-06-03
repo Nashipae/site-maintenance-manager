@@ -6,7 +6,7 @@ import org.sql2o.*;
 
 
 public class Site {
-    private int site_id;
+    private int id;
     private String name;
     private int engineerId;
     private LocalDateTime createdAt;
@@ -19,7 +19,7 @@ public class Site {
         }else{
             Site newSite = (Site) otherSite;
             return this.getName().equals(newSite.getName()) &&
-                    this.getSite_id() == newSite.getSite_id() &&
+                    this.getId() == newSite.getId() &&
                     this.getEngineerId() == newSite.getEngineerId();
         }
     }
@@ -27,7 +27,7 @@ public class Site {
     public void save(){
         try(Connection con = DB.sql2o.open()){
             String sql = "INSERT INTO sites (name, EngineerId) VALUES (:name, :EngineerId)";
-            this.site_id = (int) con.createQuery(sql, true)
+            this.id= (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .addParameter("engineerId", this.engineerId)
                     .executeUpdate()
@@ -40,7 +40,7 @@ public class Site {
             String sql = "UPDATE sites SET name = :name WHERE id = :id";
             con.createQuery(sql)
                     .addParameter("name", name)
-                    .addParameter("site_id", site_id)
+                    .addParameter("id", id)
                     .executeUpdate();
         }
     }
@@ -49,7 +49,7 @@ public class Site {
         try(Connection con = DB.sql2o.open()){
             String sql = "DELETE FROM sites WHERE id =:id;";
             con.createQuery(sql)
-                    .addParameter("site_id", site_id)
+                    .addParameter("id", id)
                     .executeUpdate();
         }
     }
@@ -84,14 +84,14 @@ public class Site {
         }
     }
 
-    public int getSite_id() {
-        return site_id;
+    public int getId() {
+        return id;
     }
 
-    public static Site find(int id) {
+    public static Site find(int site_id) {
         try(Connection con = DB.sql2o.open()){
             String sql = "SELECT * FROM sites where id=:id";
-            Site site = con.createQuery(sql).addParameter("id", id).executeAndFetchFirst(Site.class);
+            Site site = con.createQuery(sql).addParameter("id", site_id).executeAndFetchFirst(Site.class);
             return site;
         }
     }

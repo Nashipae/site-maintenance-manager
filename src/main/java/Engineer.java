@@ -5,7 +5,7 @@ import org.sql2o.*;
 
 
 public class Engineer{
-    private int eng_id;
+    private int id;
     private String name;
     private String siteAllocation;
     private LocalDateTime hireDate;
@@ -53,14 +53,14 @@ public class Engineer{
     }
 
     public int getEng_id() {
-        return eng_id;
+        return id;
     }
 
-    public static Engineer find(int eng_id) {
+    public static Engineer find(int id) {
         try(Connection con = DB.sql2o.open()){
             String sql = "SELECT * FROM engineers where id=:id";
             Engineer engineer = con.createQuery(sql)
-                    .addParameter("eng_id", eng_id)
+                    .addParameter("id", id)
                     .executeAndFetchFirst(Engineer.class);
             return engineer;
         }
@@ -70,7 +70,7 @@ public class Engineer{
         try(Connection con = DB.sql2o.open()){
             String sql = "SELECT * FROM sites where engineerId=:id";
             return con.createQuery(sql)
-                    .addParameter("id", this.eng_id)
+                    .addParameter("id", this.id)
                     .executeAndFetch(Site.class);
         }
     }
@@ -78,7 +78,7 @@ public class Engineer{
     public void save(){
         try(Connection con = DB.sql2o.open()){
             String sql = "INSERT INTO engineers (name) VALUES (:name)";
-            this.eng_id = (int) con.createQuery(sql, true)
+            this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .executeUpdate()
                     .getKey();
