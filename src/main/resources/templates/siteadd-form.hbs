@@ -1,0 +1,21 @@
+{{#partial "content"}}
+    <div>
+        Fill in the form below in order to add a new site.
+
+        <form action="/posts/new-site" method="post">
+            <fieldset>
+                <legend>New Site Details:</legend>
+                Site No: <input id="site-no"  type="number" required><br>
+                Name: <input id="site-name" type="text" required><br>
+                Active status: <input id="active-status" type="radio" name="active-status" checked required>Active<br>
+                                <input id="active-status" type="radio" name="active-status" required>Decommissioned<br>
+                Date on air: <input type="datetime-local" required>
+                Details: <input type="text">
+            </fieldset>
+            <button type="submit"></button> <button type="reset"></button>
+
+        </form>
+
+    </div>
+
+{{/partial}}

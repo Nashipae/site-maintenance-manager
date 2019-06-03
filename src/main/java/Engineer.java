@@ -10,6 +10,7 @@ public class Engineer{
     private String siteAllocation;
     private LocalDateTime hireDate;
     private String engineerDetails;
+    private int mobileNo;
 
 
     @Override
@@ -37,6 +38,8 @@ public class Engineer{
     public String getEngineerDetails(){
         return engineerDetails;
     }
+
+    public int getMobileNo(){ return mobileNo;}
 
     public LocalDateTime getHireDate(){
         return hireDate;

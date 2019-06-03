@@ -1,0 +1,18 @@
+{{#partial "content"}}
+    <div class="container">
+        Fill in the form below in order to add an engineer.
+
+        <form action="/posts/new-engineer" method="post">
+            <fieldset>
+                <legend>Engineer Details:</legend>
+                Employment No: <input id="ek-no"  type="number" required><br>
+                Name: <input id="eng-name" type="text" required><br>
+                Mobile No: <input id="mobile" type="tel" required><br>
+                Date of hire: <input type="text" required>
+                Details: <input type="text">
+            </fieldset>
+        </form>
+        <button type="submit"></button><br> <button type="reset"></button>
+    </div>
+
+{{/partial}}
