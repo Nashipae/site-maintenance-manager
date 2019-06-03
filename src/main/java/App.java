@@ -49,5 +49,33 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
+        //get: show new site form
+        get("/sites/new", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "siteadd-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+//        get("/engineers/:eng_id/sites/:site_id", (request, response) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            Engineer engineer = Engineer.find(Integer.parseInt(request.params(":eng_id")));
+//            Site site = Site.find(Integer.parseInt(request.params(":site_id")));
+//            model.put("engineer", engineer);
+//            model.put("site", site);
+//            return new ModelAndView(model, "layout.hbs");
+//        }, new HandlebarsTemplateEngine());
+
+        //get: show new engineer form
+        get("/engineer/new", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "engineer-add-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+
     }
+
+
+
+
+
 }

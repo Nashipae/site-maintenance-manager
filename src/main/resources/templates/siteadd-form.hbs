@@ -1,22 +1,38 @@
 {{#partial "content"}}
-    <div>
+
+    <div class="container">
         Fill in the form below in order to add a new site.
 
-        <form action="/posts/new-site" method="post">
+        <form action="/sites/new" method="post" id="sites-form">
             <fieldset>
                 <legend>New Site Details:</legend>
-                Site No: <input id="site-no"  type="number" required><br>
-                Name: <input id="site-name" type="text" required><br>
-                Active status: <input id="active-status" type="radio" name="active-status" checked required>Active<br>
-                                <input id="active-status" type="radio" name="active-status" required>Decommissioned<br>
-                Date on air: <input type="datetime-local" required>
-                Engineer assigned: <select id="site-assignment" name="site-assignment" type="text" required>{{eng-name}}</select><br>
-                Details: <input type="text">
+
+                <label>Site No: </label>
+                <input id="site-no"  type="number" required><br>
+
+                <label>Site Name: </label>
+                <input id="site-name" type="text" required><br>
+
+                <label>Details:</label>
+                <input type="textarea" col="40" row="40"><br>
+
+                <label>Date on air: </label>
+                <input type="date" required><br>
+
+                <label>Engineer assigned: </label>
+                <select id="site-assignment" name="site-assignment" type="text" required>{{eng-name}}</select><br>
+
+                <label>Status: </label>
+                <input id="active-status" type="radio" name="active-status" checked required>Active
+                <input id="active-status" type="radio" name="active-status" required>Decommissioned<br>
+
             </fieldset>
-            <button type="submit"></button> <button type="reset"></button>
-
+            <input type="submit"> <input type="reset">
         </form>
-
     </div>
 
+
+
 {{/partial}}
+
+{{> layout.hbs}}

@@ -6,7 +6,7 @@ import org.sql2o.*;
 
 
 public class Site {
-    private int id;
+    private int site_id;
     private String name;
     private int engineerId;
     private LocalDateTime createdAt;
@@ -19,7 +19,7 @@ public class Site {
         }else{
             Site newSite = (Site) otherSite;
             return this.getName().equals(newSite.getName()) &&
-                    this.getId() == newSite.getId() &&
+                    this.getSite_id() == newSite.getSite_id() &&
                     this.getEngineerId() == newSite.getEngineerId();
         }
     }
@@ -27,7 +27,7 @@ public class Site {
     public void save(){
         try(Connection con = DB.sql2o.open()){
             String sql = "INSERT INTO sites (name, EngineerId) VALUES (:name, :EngineerId)";
-            this.id = (int) con.createQuery(sql, true)
+            this.site_id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .addParameter("engineerId", this.engineerId)
                     .executeUpdate()
@@ -40,7 +40,7 @@ public class Site {
             String sql = "UPDATE sites SET name = :name WHERE id = :id";
             con.createQuery(sql)
                     .addParameter("name", name)
-                    .addParameter("id", id)
+                    .addParameter("site_id", site_id)
                     .executeUpdate();
         }
     }
@@ -49,7 +49,7 @@ public class Site {
         try(Connection con = DB.sql2o.open()){
             String sql = "DELETE FROM sites WHERE id =:id;";
             con.createQuery(sql)
-                    .addParameter("id", id)
+                    .addParameter("site_id", site_id)
                     .executeUpdate();
         }
     }
@@ -84,8 +84,8 @@ public class Site {
         }
     }
 
-    public int getId() {
-        return id;
+    public int getSite_id() {
+        return site_id;
     }
 
     public static Site find(int id) {

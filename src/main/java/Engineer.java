@@ -5,7 +5,7 @@ import org.sql2o.*;
 
 
 public class Engineer{
-    private int id;
+    private int eng_id;
     private String name;
     private String siteAllocation;
     private LocalDateTime hireDate;
@@ -19,7 +19,7 @@ public class Engineer{
             return false;
         }else{
             Engineer newEngineer = (Engineer) otherEngineer;
-            return this.getName().equals(newEngineer.getName()) && this.getId() == newEngineer.getId();
+            return this.getName().equals(newEngineer.getName()) && this.getEng_id() == newEngineer.getEng_id();
         }
     }
 
@@ -52,15 +52,15 @@ public class Engineer{
         }
     }
 
-    public int getId() {
-        return id;
+    public int getEng_id() {
+        return eng_id;
     }
 
-    public static Engineer find(int id) {
+    public static Engineer find(int eng_id) {
         try(Connection con = DB.sql2o.open()){
             String sql = "SELECT * FROM engineers where id=:id";
             Engineer engineer = con.createQuery(sql)
-                    .addParameter("id", id)
+                    .addParameter("eng_id", eng_id)
                     .executeAndFetchFirst(Engineer.class);
             return engineer;
         }
@@ -70,7 +70,7 @@ public class Engineer{
         try(Connection con = DB.sql2o.open()){
             String sql = "SELECT * FROM sites where engineerId=:id";
             return con.createQuery(sql)
-                    .addParameter("id", this.id)
+                    .addParameter("id", this.eng_id)
                     .executeAndFetch(Site.class);
         }
     }
@@ -78,7 +78,7 @@ public class Engineer{
     public void save(){
         try(Connection con = DB.sql2o.open()){
             String sql = "INSERT INTO engineers (name) VALUES (:name)";
-            this.id = (int) con.createQuery(sql, true)
+            this.eng_id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .executeUpdate()
                     .getKey();
