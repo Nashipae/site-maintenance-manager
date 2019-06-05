@@ -3,7 +3,7 @@
     <div class="container">
         Fill in the form below in order to add a new site.
 
-        <form action="/sites/new" method="post" id="sites-form" >
+        <form action="/sites" method="post" id="sites-form" >
 
             <fieldset>
 
@@ -41,7 +41,7 @@
                 <div class="form-group row">
                 <label class="col-md-2 col-form-label">Engineer assigned: </label>
                     <div class="col-md-5">
-                        <input id="site-assignment" name="site-assignment" type="text" class="form-control"><select class="form-control" id="site-assignment" name="site-assignment" type="text" required>{{eng-name}}</select><br>
+                        <input id="site-assignment" name="site-assignment" type="text" class="form-control"><select class="form-control" id="site-assignment" name="site-assignment" type="text">{{eng-name}}</select><br>
                     </div>
                 </div>
 
@@ -58,7 +58,7 @@
             <input type="submit"> <input type="reset">
         </form>
 
-
+    </div>
 
 {{/partial}}
 

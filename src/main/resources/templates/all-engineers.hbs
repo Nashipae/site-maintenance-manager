@@ -1,16 +1,26 @@
-
+{{#partial "content"}}
 <div class="container">
-    <h3>Engineers List!</h3>
-<!--    #if($clients)-->
-<!--    <ul>-->
-<!--        #foreach ($client in $clients)-->
-<!--        <li><p>$client.getName()</p></li>-->
-<!--        #end-->
-<!--    </ul>-->
-<!--    #else-->
-<!--    <p>No client!</p>-->
-<!--    #end-->
+   <div class="container">
+        <h2>All engineers</h2>
+        #if($engineers)
+        <ul>
+            #foreach ($engineer in $engineers)
+            <li><a href="/engineers/$engineer.getId()">$engineer.getName()</a></li>
+            #end
+        </ul>
+        #else
+        <h3>Sorry you haven't registered any engineer yet!</h3>
+        #end
 
-    <br>
+        <a href="/engineers">View all engineers</a>
+        <br>
+        <a href="/engineers/new">Add a New engineer</a>
+        <br>
+        <a href="/">Home</a>
+    </div>
     <a href="/">Home</a>
 </div>
+
+{{/partial}}
+
+{{> layout}}

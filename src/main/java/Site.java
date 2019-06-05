@@ -7,6 +7,7 @@ import org.sql2o.*;
 
 public class Site {
     private int id;
+    private int site_id;
     private String name;
     private int engineerId;
     private LocalDateTime createdAt;
@@ -64,6 +65,8 @@ public class Site {
     public int getEngineerId(){
         return engineerId;
     }
+
+    public int getSite_id(){return site_id;}
 
     public String getName() {
         return name;

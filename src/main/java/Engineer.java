@@ -1,11 +1,12 @@
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.ArrayList;
+
 import org.sql2o.*;
 
 
 public class Engineer{
     private int id;
+    private int emp_no;
     private String name;
     private String siteAllocation;
     private LocalDateTime hireDate;
@@ -14,16 +15,19 @@ public class Engineer{
 
 
     @Override
-    public boolean equals(Object otherEngineer){
-        if(!(otherEngineer instanceof Engineer)){
+    public boolean equals(Object otherEngineer) {
+        if (!(otherEngineer instanceof Engineer)) {
             return false;
-        }else{
+        } else {
             Engineer newEngineer = (Engineer) otherEngineer;
-            return this.getName().equals(newEngineer.getName()) && this.getEng_id() == newEngineer.getEng_id();
+            return this.getName().equals(newEngineer.getName()) && this.getId() == newEngineer.getId();
         }
-    }
 
-    public Engineer(String name){
+        }
+
+    public int getEmp_no(){return emp_no;}
+
+    public Engineer(String name, int emp_no){
         this.name = name;
     }
 
@@ -52,7 +56,7 @@ public class Engineer{
         }
     }
 
-    public int getEng_id() {
+    public int getId() {
         return id;
     }
 
@@ -77,9 +81,10 @@ public class Engineer{
 
     public void save(){
         try(Connection con = DB.sql2o.open()){
-            String sql = "INSERT INTO engineers (name) VALUES (:name)";
+            String sql = "INSERT INTO engineers (name, emp_no) VALUES (:name, emp_no)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
+                    .addParameter("emp_no", this.emp_no)
                     .executeUpdate()
                     .getKey();
         }
