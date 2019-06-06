@@ -91,31 +91,39 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Engineer> engineers = Engineer.all();
             int emp_no = Integer.parseInt(request.queryParams("emp_no"));
-            String name = request.queryParams("name");
+            String name = request.queryParams("eng-name");
             Engineer newEngineer = new Engineer(name, emp_no);
             System.out.println(name);
             newEngineer.save();
-            return new ModelAndView(model, "engineers-success.hbs");
+            return new ModelAndView(model, "engineer-success.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/engineers/:eng_id/sites/:site_id", (request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            Engineer engineer = Engineer.find(Integer.parseInt(request.params(":eng_id")));
-            Site site = Site.find(Integer.parseInt(request.params(":site_id")));
-            model.put("engineer", engineer);
-            model.put("site", site);
-            return new ModelAndView(model, "all-engineers.hbs");
-        }, new HandlebarsTemplateEngine());
-//
+//        get("/engineers/:eng_id/sites/:site_id", (request, response) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            Engineer engineer = Engineer.find(Integer.parseInt(request.params(":eng_id")));
+//            Site site = Site.find(Integer.parseInt(request.params(":site_id")));
+//            model.put("engineer", engineer);
+//            model.put("site", site);
+//            return new ModelAndView(model, "all-engineers.hbs");
+//        }, new HandlebarsTemplateEngine());
+////
 //        post("/engineers/:engineer_id/sites/:id", (request, response) -> {
 //            Map<String, Object> model = new HashMap<>();
 //            Site site = Site.find(Integer.parseInt(request.params("id")));
 //            String name = request.queryParams("name");
 //            Engineer engineer = Engineer.find(site.getEngineerId());
 //            site.update(name);
-//            String url = String.format("/engineers/%d/sites/%d", engineer.getEng_id(), site.getId());
+//            String url = String.format("/engineers/%d/sites/%d", engineer.getId(), site.getId());
 //            response.redirect(url);
 //            return new ModelAndView(model, "index.hbs");
+//        }, new HandlebarsTemplateEngine());
+//
+//
+//        get("/sites/:id", (request, response) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            Site site = Site.find(Integer.parseInt(request.params(":id")));
+//            model.put("site", site);
+//            return new ModelAndView(model, "/");
 //        }, new HandlebarsTemplateEngine());
 //
 //
@@ -128,42 +136,35 @@ public class App {
 //            return new ModelAndView(model, "index.hbs");
 //        }, new HandlebarsTemplateEngine());
 //
-
 //
-//        get("/sites/:id", (request, response) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            Site site = Site.find(Integer.parseInt(request.params(":id")));
-//            model.put("site", site);
-//            return new ModelAndView(model, "layout.hbs");
-//        }, new HandlebarsTemplateEngine());
 //
-//        get("/engineers/new", (request, response) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            return new ModelAndView(model, "layout.hbs");
-//        }, new HandlebarsTemplateEngine());
+////        get("/engineers/new", (request, response) -> {
+////            Map<String, Object> model = new HashMap<>();
+////            return new ModelAndView(model, "layout.hbs");
+////        }, new HandlebarsTemplateEngine());
+////
 //
-
-//
-//        get("/engineers", (request, response) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            model.put("engineers", Engineer.all());
-//            return new ModelAndView(model, "layout.hbs");
-//        }, new HandlebarsTemplateEngine());
-//
+////
+////        get("/engineers", (request, response) -> {
+////            Map<String, Object> model = new HashMap<>();
+////            model.put("engineers", Engineer.all());
+////            return new ModelAndView(model, "layout.hbs");
+////        }, new HandlebarsTemplateEngine());
+////
 //        get("/engineers/:id", (request, response) -> {
 //            Map<String, Object> model = new HashMap<>();
 //            Engineer engineer = Engineer.find(Integer.parseInt(request.params(":id")));
 //            model.put("engineer", engineer);
-//            return new ModelAndView(model, "layout.hbs");
+//            return new ModelAndView(model, "/");
 //        }, new HandlebarsTemplateEngine());
-//
+////
 //        get("engineers/:id/sites/new", (request, response) -> {
 //            Map<String, Object> model = new HashMap<>();
 //            Engineer engineer = Engineer.find(Integer.parseInt(request.params(":id")));
 //            model.put("engineer", engineer);
 //            return new ModelAndView(model, "layout.hbs");
 //        }, new HandlebarsTemplateEngine());
-//    }
+    }
 //
 //}
 //
@@ -174,4 +175,3 @@ public class App {
 
 //    }
     }
-}

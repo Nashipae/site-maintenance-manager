@@ -81,7 +81,7 @@ public class Engineer{
 
     public void save(){
         try(Connection con = DB.sql2o.open()){
-            String sql = "INSERT INTO engineers (name, emp_no) VALUES (:name, emp_no)";
+            String sql = "INSERT INTO engineers (name, emp_no) VALUES (:name, :emp_no)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .addParameter("emp_no", this.emp_no)
