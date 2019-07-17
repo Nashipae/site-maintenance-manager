@@ -5,27 +5,49 @@
         <h2>All engineers</h2>
 
        {{#if engineers}}
-           <p> Click on the engineer name to view the details.</p>
+           <p> Click on the engineer name to view the site details.</p>
        {{else}}
            <p>Click <a href="/engineers">here </a>to add an engineer.</p>
        {{/if}}
 
-        {{#if engineers}}
-        <ul>
-{{!--            {{#each engineer in engineers}}--}}
-            {{#each engineers}}
+    {{#if engineers}}
 
-                <li><a href="/engineers/{{id}}">{{name}}</a></li>
 
-            {{/each}}
+           <div class="table-responsive">
+           <table class="table table-bordered table-dark table-sm">
 
-        </ul>
+               <thead>
+               <tr>
+                   <th scope="col">#.</th>
+                   <th scope="col">EMPLOYEE NO.</th>
+                   <th scope="col">NAME</th>
+                   <th scope="col">MOBILE NO.</th>
+                   <th scope="col">SITES ALLOCATED</th>
 
-        {{else}}
-            <p>No Records</p>
-        {{/if}}
+               </tr>
+               </thead>
 
-        <a href="/all-engineers">View all engineers</a>
+
+               {{#each engineers}}
+               <tbody>
+               <tr>
+
+                   <td> {{id}}</td>
+                   <td>{{emp_no}}</td>
+                   <td><a href="/engineers/{{id}}">{{name}}</a></td>
+                   <td>{{mobileNo}}</td>
+                   <td><a href="/engineers/{{id}}">Click to view</a> </td>
+
+               </tr>
+               </tbody>
+           {{/each}}
+       </table>
+       </div>
+       {{else}}
+           <p>No Records</p>
+       {{/if}}
+
+
         <br>
         <a href="/engineers/new">Add a New engineer</a>
         <br>

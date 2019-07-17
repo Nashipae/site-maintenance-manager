@@ -77,6 +77,17 @@ public class App {
             return new ModelAndView(model, "all-engineers.hbs");
         }, new HandlebarsTemplateEngine());
 
+        // locating engineer by id
+//        get: show all sites in all engineers and show all Engineers
+
+        get("/engineers/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfEngineerToFind = Integer.parseInt(request.params("id"));
+            Engineer foundEngineer = engineerDao.findById(idOfEngineerToFind);
+            model.put("engineers", foundEngineer);   //add it to model for template to display
+            return new ModelAndView(model, "engineer_details.hbs");  //individual post page.
+        }, new HandlebarsTemplateEngine());
+
 
 
 

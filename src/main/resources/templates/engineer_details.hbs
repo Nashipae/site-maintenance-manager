@@ -1,0 +1,42 @@
+{{#partial "content"}}
+
+    <p> <h2>Details of {{engineer.name}}</h2></p>
+
+     {{#if engineers}}
+
+        {{#each}}
+        <div class="table-responsive">
+            <table class="table table-bordered table-dark table-sm">
+
+                <thead>
+                <tr>
+                    <th scope="col">#.</th>
+                    <th scope="col">EMPLOYEE NO.</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">MOBILE NO.</th>
+                    <th scope="col">SITES ALLOCATED</th>
+
+                </tr>
+                </thead>
+
+                    <tbody>
+                    <tr>
+
+                        <td>{{id}}</td>
+                        <td>{{emp_no}}</td>
+                        <td>{{name}}</td>
+                        <td>{{mobileNo}}</td>
+                        <td>{{sites}}</td>
+
+                    </tr>
+                    </tbody>
+                {{/each}}
+            </table>
+        </div>
+    {{else}}
+            <p>No Records</p>
+    {{/if}}
+    {{name}}
+{{/partial}}
+
+{{> layout.hbs}}
