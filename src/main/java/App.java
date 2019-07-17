@@ -77,9 +77,9 @@ public class App {
             return new ModelAndView(model, "all-engineers.hbs");
         }, new HandlebarsTemplateEngine());
 
-        // locating engineer by id
-//        get: show all sites in all engineers and show all Engineers
 
+
+//        Get details of each engineer
         get("/engineers/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfEngineerToFind = Integer.parseInt(request.params("id"));
@@ -89,6 +89,11 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
+
+        get("/coming-soon.hbs", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "coming-soon.hbs");
+        }, new HandlebarsTemplateEngine());
 
 
     }

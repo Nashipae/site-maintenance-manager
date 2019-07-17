@@ -1,6 +1,16 @@
 {{#partial "content"}}
 
-    <p> <h2>Details of {{engineer.name}}</h2></p>
+    {{#if engineers}}
+
+        {{#each}}
+
+    <p> <h2>Details of sites maintained by Engineer {{engineer.name}}</h2></p>
+
+    {{/each}}
+
+    {{else}}
+
+    {{/if}}
 
      {{#if engineers}}
 
