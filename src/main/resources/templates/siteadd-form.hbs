@@ -3,7 +3,7 @@
     <div class="container">
         Fill in the form below in order to add a new site.
 
-        <form action="/sites/{{site.id}}" method="post" id="sites-form" >
+        <form action="/sites" method="post" id="sites-form" >
 
             <fieldset>
 
@@ -12,45 +12,57 @@
                 <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Site No: </label>
                     <div class="col-sm-5">
-                <input id="site-no"  type="number" class="form-control" required><br>
+                <input id="siteId"  name="siteId" type="number" class="form-control" required><br>
                     </div>
                 </div>
 
                 <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Site Name: </label>
                         <div class="col-sm-5">
-                <input id="site-name" name = "site-name" type="text" class="form-control" required><br>
+                <input id="siteName" name = "siteName" type="text" class="form-control" required><br>
                         </div>
                 </div>
 
-                <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Details:</label>
-                    <div class="col-sm-5">
-                <input type="textarea"  name="details" col="40" row="40" class="form-control"><br>
-                </div>
-                </div>
 
 
                 <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Date on air: </label>
+                    <label class="col-md-2 col-form-label">Engineer assigned: </label>
                     <div class="col-sm-5">
-                <input type="date" name="date-on-air" class="form-control" required><br>
+
+                        <select id="engineerName" name="engineerName">
+                            {{#each engineers}}
+                                <option value="{{id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+
+
+{{!--                       <select class="form-control" id="site-assignment" name="engineerName" type="text">{{engineer.name}}</select><br>--}}
+
                     </div>
                 </div>
+{{!--                <div class="form-group row">--}}
+{{!--                <label class="col-sm-2 col-form-label">Details:</label>--}}
+{{!--                    <div class="col-sm-5">--}}
+{{!--                <input type="textarea"  name="details" col="40" row="40" class="form-control"><br>--}}
+{{!--                </div>--}}
+{{!--                </div>--}}
 
-                <div class="form-group row">
-                <label class="col-md-2 col-form-label">Engineer assigned: </label>
-                    <div class="col-md-5">
-                        <input id="site-assignment" name="site-assignment" type="text" class="form-control"><select class="form-control" id="site-assignment" name="name" type="text">{{name}}</select><br>
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Engineer No: </label>
-                    <div class="col-sm-5">
-                        <input id="site-no" name="engineerId" type="number" class="form-control" required><br>
-                    </div>
-                </div>
+{{!--                <div class="form-group row">--}}
+{{!--                <label class="col-sm-2 col-form-label">Date on air: </label>--}}
+{{!--                    <div class="col-sm-5">--}}
+{{!--                <input type="date" name="date-on-air" class="form-control" required><br>--}}
+{{!--                    </div>--}}
+{{!--                </div>--}}
+
+
+
+{{!--                <div class="form-group row">--}}
+{{!--                    <label class="col-sm-2 col-form-label">Engineer No: </label>--}}
+{{!--                    <div class="col-sm-5">--}}
+{{!--                        <input id="site-no" name="engineerId" type="number" class="form-control" required><br>--}}
+{{!--                    </div>--}}
+{{!--                </div>--}}
 
 
                 <div class="form-group row">

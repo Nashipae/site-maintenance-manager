@@ -1,116 +1,107 @@
 package models;
 
-import dao.DB;
-import org.sql2o.Connection;
-
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Objects;
 
 
 public class Site {
     private int id;
     private int siteId;
-    private String name;
+    private String siteName;
     private int engineerId;
     private String engineerName;
     private LocalDateTime createdAt;
     private boolean decommissioned;
 
-    @Override
-    public boolean equals(Object otherSite){
-        if(!(otherSite instanceof Site)){
-            return false;
-        }else{
-            Site newSite = (Site) otherSite;
-            return this.getName().equals(newSite.getName()) &&
-                    this.getId() == newSite.getId() &&
-                    this.getEngineerId() == newSite.getEngineerId();
-        }
-    }
-
-    public void save(){
-        try(Connection con = DB.sql2o.open()){
-            String sql = "INSERT INTO sites (name, engineerid, engineer_name) VALUES (:name, :EngineerId,:engineerName)";
-            this.id= (int) con.createQuery(sql, true)
-                    .addParameter("name", this.name)
-                    .addParameter("engineerId", this.engineerId)
-                    .executeUpdate()
-                    .getKey();
-        }
-    }
-
-    public void update(String name){
-        try(Connection con = DB.sql2o.open()){
-            String sql = "UPDATE sites SET name = :name WHERE id = :id";
-            con.createQuery(sql)
-                    .addParameter("name", name)
-                    .addParameter("id", id)
-                    .executeUpdate();
-        }
-    }
-
-    public void delete(){
-        try(Connection con = DB.sql2o.open()){
-            String sql = "DELETE FROM sites WHERE id =:id;";
-            con.createQuery(sql)
-                    .addParameter("id", id)
-                    .executeUpdate();
-        }
-    }
-
-    public Site(String name, int engineerId) {
-        this.name = name;
-        decommissioned = false;
-        createdAt = LocalDateTime.now();
-        this.engineerId = engineerId;
-    }
-
-    public int getEngineerId(){
-        return engineerId;
-    }
-
-    public int getsiteId(){return siteId;}
-
-    public String getEngineerName(){return engineerName;}
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isDecommissioned() {
-        return decommissioned;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
 
 
-    public void setId(int id) {
+    public Site(int id, int siteId, String siteName, int engineerId, String engineerName, LocalDateTime createdAt, boolean decommissioned) {
         this.id = id;
-    }
-
-    public void setsiteId(int siteId) {
         this.siteId = siteId;
+        this.siteName = siteName;
+        this.engineerId = engineerId;
+        this.engineerName = engineerName;
+        this.createdAt = createdAt;
+        this.decommissioned = decommissioned;
     }
 
-    public static List<Site> all() {
-        String sql = "SELECT id, name, engineerId FROM sites";
-        try(Connection con = DB.sql2o.open()){
-            return con.createQuery(sql).executeAndFetch(Site.class);
-        }
+    public Site(int name, String siteId, String engineerName) {
+
     }
 
     public int getId() {
         return id;
     }
 
-    public static Site find(int siteId) {
-        try(Connection con = DB.sql2o.open()){
-            String sql = "SELECT * FROM sites where id=:id";
-            Site site = con.createQuery(sql).addParameter("id", siteId).executeAndFetchFirst(Site.class);
-            return site;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(int siteId) {
+        this.siteId = siteId;
+    }
+
+    public String getSiteName() {
+        return siteName;
+    }
+
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
+    }
+
+    public int getEngineerId() {
+        return engineerId;
+    }
+
+    public void setEngineerId(int engineerId) {
+        this.engineerId = engineerId;
+    }
+
+    public String getEngineerName() {
+        return engineerName;
+    }
+
+    public void setEngineerName(String engineerName) {
+        this.engineerName = engineerName;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public boolean isDecommissioned() {
+        return decommissioned;
+    }
+
+    public void setDecommissioned(boolean decommissioned) {
+        this.decommissioned = decommissioned;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Site)) return false;
+        Site site = (Site) o;
+        return getId() == site.getId() &&
+                getSiteId() == site.getSiteId() &&
+                getEngineerId() == site.getEngineerId() &&
+                isDecommissioned() == site.isDecommissioned() &&
+                getSiteName().equals(site.getSiteName()) &&
+                Objects.equals(getEngineerName(), site.getEngineerName()) &&
+                Objects.equals(getCreatedAt(), site.getCreatedAt());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getSiteId(), getSiteName(), getEngineerId(), getEngineerName(), getCreatedAt(), isDecommissioned());
     }
 }
 
