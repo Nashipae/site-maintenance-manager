@@ -1,18 +1,31 @@
 {{#partial "content"}}
+
 <div class="container">
    <div class="container">
         <h2>All engineers</h2>
-        #if($engineers)
-        <ul>
-            #foreach ($engineer in $engineers)
-            <li><a href="/engineers/$engineer.getId()">$engineer.getName()</a></li>
-            #end
-        </ul>
-        #else
-        <h3>Sorry you haven't registered any engineer yet!</h3>
-        #end
 
-        <a href="/engineers">View all engineers</a>
+       {{#if engineers}}
+           <p> Click on the engineer name to view the details.</p>
+       {{else}}
+           <p>Click <a href="/engineers">here </a>to add an engineer.</p>
+       {{/if}}
+
+        {{#if engineers}}
+        <ul>
+{{!--            {{#each engineer in engineers}}--}}
+            {{#each engineers}}
+
+                <li><a href="/engineers/{{id}}">{{name}}</a></li>
+
+            {{/each}}
+
+        </ul>
+
+        {{else}}
+            <p>No Records</p>
+        {{/if}}
+
+        <a href="/all-engineers">View all engineers</a>
         <br>
         <a href="/engineers/new">Add a New engineer</a>
         <br>
@@ -23,4 +36,4 @@
 
 {{/partial}}
 
-{{> layout}}
+{{> layout.hbs}}

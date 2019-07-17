@@ -1,9 +1,11 @@
-import org.junit.*;
-import static org.junit.Assert.*;
+import models.Site;
+import org.junit.Rule;
+import org.junit.Test;
+
 import java.time.LocalDateTime;
-import org.sql2o.*;
-import java.util.Arrays;
-import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SiteTest {
 

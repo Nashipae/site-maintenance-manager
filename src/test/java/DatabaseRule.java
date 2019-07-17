@@ -1,3 +1,4 @@
+import dao.DB;
 import org.junit.rules.ExternalResource;
 import org.sql2o.*;
 

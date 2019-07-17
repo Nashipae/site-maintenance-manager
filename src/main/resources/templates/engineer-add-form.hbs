@@ -2,7 +2,7 @@
     <div class="container">
         Fill in the form below in order to add an engineer.
 
-        <form action="/engineers" method="post">
+        <form action="/engineer/new" method="post">
             <fieldset>
                 <legend>Engineer Details:</legend>
                 <div class="form-group row">
@@ -21,7 +21,7 @@
                <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Mobile No: </label>
                         <div class="col-sm-10">
-                        <input id="mobile" type="tel" required><br>
+                        <input id="mobile" name="mobileNo" type="tel" required><br>
                         </div>
                </div>
 
@@ -36,7 +36,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Details: </label>
                     <div class="col-sm-10">
-                        <input type="text">
+                        <input type="text" name="details">
                     </div>
                 </div>
             </fieldset>

@@ -1,15 +1,18 @@
-import java.time.LocalDateTime;
+package models;
+
+import dao.DB;
 import org.sql2o.Connection;
-import java.util.ArrayList;
+
+import java.time.LocalDateTime;
 import java.util.List;
-import org.sql2o.*;
 
 
 public class Site {
     private int id;
-    private int site_id;
+    private int siteId;
     private String name;
     private int engineerId;
+    private String engineerName;
     private LocalDateTime createdAt;
     private boolean decommissioned;
 
@@ -27,7 +30,7 @@ public class Site {
 
     public void save(){
         try(Connection con = DB.sql2o.open()){
-            String sql = "INSERT INTO sites (name, EngineerId) VALUES (:name, :EngineerId)";
+            String sql = "INSERT INTO sites (name, engineerid, engineer_name) VALUES (:name, :EngineerId,:engineerName)";
             this.id= (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .addParameter("engineerId", this.engineerId)
@@ -66,7 +69,9 @@ public class Site {
         return engineerId;
     }
 
-    public int getSite_id(){return site_id;}
+    public int getsiteId(){return siteId;}
+
+    public String getEngineerName(){return engineerName;}
 
     public String getName() {
         return name;
@@ -80,6 +85,15 @@ public class Site {
         return createdAt;
     }
 
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setsiteId(int siteId) {
+        this.siteId = siteId;
+    }
+
     public static List<Site> all() {
         String sql = "SELECT id, name, engineerId FROM sites";
         try(Connection con = DB.sql2o.open()){
@@ -91,10 +105,10 @@ public class Site {
         return id;
     }
 
-    public static Site find(int site_id) {
+    public static Site find(int siteId) {
         try(Connection con = DB.sql2o.open()){
             String sql = "SELECT * FROM sites where id=:id";
-            Site site = con.createQuery(sql).addParameter("id", site_id).executeAndFetchFirst(Site.class);
+            Site site = con.createQuery(sql).addParameter("id", siteId).executeAndFetchFirst(Site.class);
             return site;
         }
     }
