@@ -117,7 +117,7 @@ public class App {
 //            int engineerId = Integer.parseInt(req.queryParams("engineerId"));
             Site newSite = new Site(siteId, siteName , engineerName );
             siteDao.add(newSite);
-            res.redirect("/");
+            res.redirect("/site/all-sites");
             return null;
         }, new HandlebarsTemplateEngine());
 

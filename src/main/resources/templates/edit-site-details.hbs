@@ -1,0 +1,23 @@
+{{#partial "content"}}
+    {{#if editSite}}
+        <h1>Edit site details</h1>
+        <form action="/sites/{{site.id}}/edit" method="post">
+            <br>
+            <label for="site_name">edit site details</label>
+            <input id="site_name" name="siteName" type="text" value="{{site.siteName}}">
+            <br>
+            <label for="engineerid">Update this site's engineer:</label>
+            <select id="engineerid" name="engineerId">
+                {{#each engineers}}
+                    <option value="{{id}}">{{siteName}}</option>
+                {{/each}}
+            </select>
+
+                <h3> You'll need to add an engineer before you add a site. <a href="/engineers">Add one here.</a> </h3>
+            {{/if}}
+            <button type="submit" class="btn btn-success">submit</button>
+        </form>
+    {{/if}}
+{{/partial}}
+
+{{> layout.hbs}}
