@@ -134,6 +134,18 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
+//        get: show sites per engineer
+        get("/engineers/:id", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int currentEngineerId = Integer.parseInt(req.params("id"));
+            Engineer currentEngineer = engineerDao.findById(currentEngineerId);
+            model.put("engineer", currentEngineer);
+            List<Site> allSitesforEngineer = engineerDao.getAllSitesByEngineer(currentEngineerId);
+            model.put("sites", allSitesforEngineer);
+            model.put("engineers", engineerDao.getAll());
+            return new ModelAndView(model, "sites-per-engineer.hbs");
+        }, new HandlebarsTemplateEngine());
+
 
     }
 
