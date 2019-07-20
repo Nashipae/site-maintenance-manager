@@ -98,7 +98,7 @@ public class App {
 
 
 //        show new site form
-        get("/sites", (req, res) -> {
+        get("/sites/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Engineer> engineers = engineerDao.getAll();
             model.put("engineers", engineers);
@@ -114,11 +114,23 @@ public class App {
             int siteId = Integer.parseInt(req.queryParams("siteId"));
             String siteName = req.queryParams("siteName");
             String engineerName = req.queryParams("engineerName");
-//            int engineerId = Integer.parseInt(req.queryParams("engineerId"));
-            Site newSite = new Site(siteId, siteName , engineerName );
+            int engineerId = Integer.parseInt(req.queryParams("engineerId"));
+            Site newSite = new Site(siteId, siteName , engineerId, engineerName);
+            System.out.println(newSite.getEngineerId());
             siteDao.add(newSite);
-            res.redirect("/site/all-sites");
+            res.redirect("/sites/all-sites");
             return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: show all sites in all engineers and show all Engineers
+        get("/sites/all-sites", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Site> allSites = siteDao.getAll();
+            model.put("sites", allSites);
+//            model.put("engineers", allEngineers);
+            List<Site> sites = siteDao.getAll();
+            model.put("sites", sites);
+            return new ModelAndView(model, "all-sites-list.hbs");
         }, new HandlebarsTemplateEngine());
 
 

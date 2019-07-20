@@ -1,18 +1,10 @@
 {{#partial "content"}}
 
+
+    <p> <h2>Details of sites maintained by Engineer {{name}}</h2></p>
+
+
     {{#if engineers}}
-
-        {{#each}}
-
-    <p> <h2>Details of sites maintained by Engineer {{engineer.name}}</h2></p>
-
-    {{/each}}
-
-    {{else}}
-
-    {{/if}}
-
-     {{#if engineers}}
 
         {{#each}}
         <div class="table-responsive">
@@ -36,17 +28,32 @@
                         <td>{{emp_no}}</td>
                         <td>{{name}}</td>
                         <td>{{mobileNo}}</td>
-                        <td>{{sites}}</td>
-
+                    <td>
+                {{#if sites}}
+                    {{#each sites }}
+                        {{engineerId}}
+                    {{/each}}
+                {{/if}}
+                    </td>
                     </tr>
                     </tbody>
-                {{/each}}
+        {{/each}}
+
             </table>
+
         </div>
+
+        <h3>Sites Maintained:</h3>
+        <ol>
+            <li>{{site.name}}</li>
+        </ol>
+
     {{else}}
-            <p>No Records</p>
+        <p>No Records</p>
     {{/if}}
-    {{name}}
+
+
+
 {{/partial}}
 
 {{> layout.hbs}}
