@@ -56,7 +56,7 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Engineer> engineers = engineerDao.getAll();
             int emp_no = Integer.parseInt(request.queryParams("emp_no"));
-            String name = request.queryParams("eng-name");
+            String name = request.queryParams("name");
             Engineer newEngineer = new Engineer(name, emp_no);
             System.out.println(name);
             engineerDao.add(newEngineer);
@@ -114,8 +114,8 @@ public class App {
             int siteId = Integer.parseInt(req.queryParams("siteId"));
             String siteName = req.queryParams("siteName");
             String engineerName = req.queryParams("engineerName");
-            int engineerId = Integer.parseInt(req.queryParams("engineerId"));
-            Site newSite = new Site(siteId, siteName , engineerId, engineerName);
+//            int engineerId = Integer.parseInt(req.queryParams("engineerId"));
+            Site newSite = new Site(siteId, siteName , engineerName);
             System.out.println(newSite.getEngineerId());
             siteDao.add(newSite);
             res.redirect("/sites/all-sites");
