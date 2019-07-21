@@ -49,7 +49,7 @@ public class Sql2OSiteDao implements SiteDao {
     }
 
     @Override
-    public void update(int id, String newSiteName, String newSiteId, String newEngineerName, int engineerId) {
+    public void update(int id, String newSiteName, int newSiteId, String newEngineerName, int engineerId) {
         String sql = "UPDATE sites SET (siteName, siteId, engineerName, engineerId) = (:siteName, :siteId, :engineerName, :engineerId) WHERE id=:id"; //raw sql
         try(Connection con = DB.sql2o.open()){
             con.createQuery(sql)

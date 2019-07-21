@@ -29,7 +29,7 @@ public class App {
         if (process.environment().get("PORT") != null) {
             port = Integer.parseInt(process.environment().get("PORT"));
         } else {
-            port = 4568;
+            port = 4567;
         }
         port(port);
 
@@ -100,6 +100,8 @@ public class App {
 //        show new site form
         get("/sites/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            List<Site> sites = siteDao.getAll();
+            model.put("sites", sites);
             List<Engineer> engineers = engineerDao.getAll();
             model.put("engineers", engineers);
             return new ModelAndView(model, "siteadd-form.hbs");
@@ -110,14 +112,14 @@ public class App {
         post("/sites", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Site> allSites = siteDao.getAll();
-            model.put("sites", allSites);
             int siteId = Integer.parseInt(req.queryParams("siteId"));
             String siteName = req.queryParams("siteName");
             String engineerName = req.queryParams("engineerName");
 //            int engineerId = Integer.parseInt(req.queryParams("engineerId"));
             Site newSite = new Site(siteId, siteName , engineerName);
-            System.out.println(newSite.getEngineerId());
+            System.out.println(newSite.getEngineerName());
             siteDao.add(newSite);
+            model.put("sites", allSites);
             res.redirect("/sites/all-sites");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -128,22 +130,18 @@ public class App {
             List<Site> allSites = siteDao.getAll();
             model.put("sites", allSites);
 //            model.put("engineers", allEngineers);
-            List<Site> sites = siteDao.getAll();
-            model.put("sites", sites);
+            List<Engineer> engineers = engineerDao.getAll();
+            model.put("engineers", engineers);
             return new ModelAndView(model, "all-sites-list.hbs");
         }, new HandlebarsTemplateEngine());
 
-
-//        get: show sites per engineer
-        get("/engineers/:id", (req, res) -> {
+//        Get details of each site
+        get("/sites/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            int currentEngineerId = Integer.parseInt(req.params("id"));
-            Engineer currentEngineer = engineerDao.findById(currentEngineerId);
-            model.put("engineer", currentEngineer);
-            List<Site> allSitesforEngineer = engineerDao.getAllSitesByEngineer(currentEngineerId);
-            model.put("sites", allSitesforEngineer);
-            model.put("engineers", engineerDao.getAll());
-            return new ModelAndView(model, "sites-per-engineer.hbs");
+            int idOfSiteToFind = Integer.parseInt(request.params("id"));
+            Engineer foundSite = engineerDao.findById(idOfSiteToFind);
+            model.put("sites", foundSite);   //add it to model for template to display
+            return new ModelAndView(model, "site_details.hbs");  //individual post page.
         }, new HandlebarsTemplateEngine());
 
 

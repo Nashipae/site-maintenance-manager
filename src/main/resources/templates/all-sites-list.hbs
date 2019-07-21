@@ -1,55 +1,55 @@
 {{#partial "content"}}
 
-<div class=container>
+    <div class=container>
 
-    <h2>List of all sites!</h2><br>
-    <hr>
+        <h2>List of all sites!</h2><br>
+        <hr>
 
-    {{#if sites}}
-
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-dark table-sm">
-
-                <thead>
-                <tr>
-                    <th scope="col">#.</th>
-                    <th scope="col">SITE NO.</th>
-                    <th scope="col">SITE NAME</th>
-                    <th scope="col">ENGINEER ID.</th>
+        {{#if sites}}
 
 
-                </tr>
-                </thead>
+            <div class="table-responsive">
+                <table class="table table-bordered table-dark table-sm">
 
-
-                {{#each sites}}
-                    <tbody>
+                    <thead>
                     <tr>
-
-                        <td>{{id}}</td>
-                        <td>{{siteId}}</td>
-                        <td>{{siteName}}</td>
-                        <td><a href="/engineers/{{id}}">{{engineer.name}}</td>
+                        <th scope="col">#.</th>
+                        <th scope="col">SITE NO.</th>
+                        <th scope="col">SITE NAME</th>
+                        <th scope="col">ENGINEER ID.</th>
 
 
                     </tr>
-                    </tbody>
-                {{/each}}
-            </table>
-        </div>
-    {{else}}
-        <p>No Records</p>
-    {{/if}}
+                    </thead>
 
 
-    <br>
-    <a href="/sites/new">Add a New Site</a>
-    <br>
-    <a href="/">Home</a>
-</div>
+                    {{#each sites}}
+                        <tbody>
+                        <tr>
 
-</div>
+                            <td>{{id}}</td>
+                            <td>{{siteId}}</td>
+                            <td>{{siteName}}</td>
+                            <td>{{engineer.id}}</td>
+{{!--                            <td><a href="/engineers/{{id}}">{{engineer.name}}</td>--}}
+
+                        </tr>
+                        </tbody>
+                    {{/each}}
+                </table>
+            </div>
+        {{else}}
+            <p>No Records</p>
+        {{/if}}
+
+
+        <br>
+        <a href="/sites/new">Add a New Site</a>
+        <br>
+        <a href="/">Home</a>
+    </div>
+
+    </div>
 
 
 {{/partial}}

@@ -1,0 +1,56 @@
+{{#partial "content"}}
+
+    {{#if sites}}
+    <p> <h2>Details of {{siteName}}</h2></p>
+    {{/if}}
+
+
+    {{#if sites}}
+
+        {{#each}}
+            <div class="table-responsive">
+            <table class="table table-bordered table-dark table-sm">
+
+                <thead>
+                <tr>
+                    <th scope="col">#.</th>
+                    <th scope="col">SITE ID.</th>
+                    <th scope="col">SITE NAME</th>
+                    <th scope="col">ENGINEER ASSIGNED:</th>
+
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+
+                    <td>{{id}}</td>
+                    <td>{{siteId}}</td>
+                    <td>{{siteName}}</td>
+                    <td>{{engineer.name}}</td>
+                    <td>
+                        {{#if sites}}
+                            {{#each sites }}
+                                {{engineerId}}
+                            {{/each}}
+                        {{/if}}
+                    </td>
+                </tr>
+                </tbody>
+        {{/each}}
+
+        </table>
+
+        </div>
+
+
+    {{else}}
+        <p>No Records</p>
+    {{/if}}
+
+
+
+{{/partial}}
+
+{{> layout.hbs}}
