@@ -25,13 +25,10 @@ public class Site {
         this.decommissioned = decommissioned;
     }
 
-    public Site(int siteId, String siteName, String engineerName) {
+    public Site(int id, int siteId, String siteName, String engineerName) {
         this.siteId = siteId;
         this.siteName = siteName;
         this.engineerName = engineerName;
-    }
-
-    public Site(int siteId, String siteName, int engineerId, String engineerName) {
     }
 
     public int getId() {

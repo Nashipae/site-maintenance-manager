@@ -1,7 +1,7 @@
 {{#partial "content"}}
 
 
-    <p> <h2>Details of sites maintained by Engineer {{name}}</h2></p>
+    <p> <h2>Details of sites maintained by Engineer {{engineer.name}}</h2></p>
 
 
     {{#if engineers}}
@@ -21,6 +21,8 @@
                 </tr>
                 </thead>
 
+
+
                     <tbody>
                     <tr>
 
@@ -29,27 +31,31 @@
                         <td>{{name}}</td>
                         <td>{{mobileNo}}</td>
                     <td>
-                {{#if sites}}
-                    {{#each sites }}
-                        {{engineerId}}
-                    {{/each}}
-                {{/if}}
+
                     </td>
                     </tr>
                     </tbody>
         {{/each}}
+        {{else}}
+        Engineer unavailable. Please add.
+        {{/if}}
 
             </table>
 
         </div>
 
         <h3>Sites Maintained:</h3>
-        <ol>
-            <li>{{site.name}}</li>
-        </ol>
+
+        {{#if sites}}
+            {{#each sites }}
+                <ol>
+                    <li>{{site.name}}</li>
+                </ol>
+                {{engineerId}}
+            {{/each}}
 
     {{else}}
-        <p>No Records</p>
+        <p>No Records available.</p>
     {{/if}}
 
 

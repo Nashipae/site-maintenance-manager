@@ -7,7 +7,7 @@
 
     {{#if sites}}
 
-        {{#each}}
+{{!--        {{#each}}--}}
             <div class="table-responsive">
             <table class="table table-bordered table-dark table-sm">
 
@@ -25,10 +25,10 @@
                 <tbody>
                 <tr>
 
-                    <td>{{id}}</td>
-                    <td>{{siteId}}</td>
-                    <td>{{siteName}}</td>
-                    <td>{{engineer.name}}</td>
+                    <td>{{site.id}}</td>
+                    <td>{{site.siteId}}</td>
+                    <td>{{site.siteName}}</td>
+                    <td>{{engineer.name }}</td>
                     <td>
                         {{#if sites}}
                             {{#each sites }}
@@ -38,7 +38,7 @@
                     </td>
                 </tr>
                 </tbody>
-        {{/each}}
+{{!--        {{/each}}--}}
 
         </table>
 

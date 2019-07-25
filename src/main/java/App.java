@@ -29,7 +29,7 @@ public class App {
         if (process.environment().get("PORT") != null) {
             port = Integer.parseInt(process.environment().get("PORT"));
         } else {
-            port = 4567;
+            port = 4561;
         }
         port(port);
 
@@ -109,22 +109,38 @@ public class App {
 
 
 //        process new site form
+//        post("/sites", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            List<Site> allSites = siteDao.getAll();
+//            int siteId = Integer.parseInt(req.queryParams("siteId"));
+//            String siteName = req.queryParams("siteName");
+//            String engineerName = req.queryParams("engineerName");
+////            int engineerId = Integer.parseInt(req.queryParams("engineerId"));
+//            Site newSite = new Site(siteId, siteName , engineerName);
+//            System.out.println(newSite.getEngineerName());
+//            siteDao.add(newSite);
+//            model.put("sites", allSites);
+//            res.redirect("/sites/all-sites");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
+
+        //task: process new site form
         post("/sites", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Site> allSites = siteDao.getAll();
+            List<Engineer> engineers = engineerDao.getAll();
+            model.put("engineers", engineers);
+            int Id = Integer.parseInt(req.params("id"));
             int siteId = Integer.parseInt(req.queryParams("siteId"));
             String siteName = req.queryParams("siteName");
+            String siteNumber = req.queryParams("siteId");
             String engineerName = req.queryParams("engineerName");
-//            int engineerId = Integer.parseInt(req.queryParams("engineerId"));
-            Site newSite = new Site(siteId, siteName , engineerName);
-            System.out.println(newSite.getEngineerName());
+            Site newSite = new Site(Id, siteId, siteName , engineerName);
             siteDao.add(newSite);
-            model.put("sites", allSites);
-            res.redirect("/sites/all-sites");
+            res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: show all sites in all engineers and show all Engineers
+        //get: show all sites and engineers assigned
         get("/sites/all-sites", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Site> allSites = siteDao.getAll();

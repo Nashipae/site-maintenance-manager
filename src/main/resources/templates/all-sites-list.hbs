@@ -1,56 +1,59 @@
 {{#partial "content"}}
 
-    <div class=container>
+    <div class="container">
+        <div class="container">
+            <h2>All Sites</h2>
 
-        <h2>List of all sites!</h2><br>
-        <hr>
+            {{#if sites}}
+                <p> Click on the site name to view the site details.</p>
+            {{else}}
+                <p>Click <a href="/sites/new">here </a>to add a site.</p>
+            {{/if}}
 
-        {{#if sites}}
+            {{#if sites}}
 
+                <div class="table-responsive">
+                    <table class="table table-bordered table-dark table-sm">
 
-            <div class="table-responsive">
-                <table class="table table-bordered table-dark table-sm">
-
-                    <thead>
-                    <tr>
-                        <th scope="col">#.</th>
-                        <th scope="col">SITE NO.</th>
-                        <th scope="col">SITE NAME</th>
-                        <th scope="col">ENGINEER ID.</th>
-
-
-                    </tr>
-                    </thead>
-
-
-                    {{#each sites}}
-                        <tbody>
+                        <thead>
                         <tr>
+                            <th scope="col">#.</th>
+                            <th scope="col">SITE NO.</th>
+                            <th scope="col">SITE NAME</th>
+                            <th scope="col">ENGINEER ID.</th>
 
-                            <td>{{id}}</td>
-                            <td>{{siteId}}</td>
-                            <td>{{siteName}}</td>
-                            <td>{{engineer.id}}</td>
-{{!--                            <td><a href="/engineers/{{id}}">{{engineer.name}}</td>--}}
 
                         </tr>
-                        </tbody>
-                    {{/each}}
-                </table>
-            </div>
-        {{else}}
-            <p>No Records</p>
-        {{/if}}
+                        </thead>
 
 
-        <br>
-        <a href="/sites/new">Add a New Site</a>
-        <br>
+                        {{#each sites}}
+                            <tbody>
+                            <tr>
+
+                                <td> {{id}}</td>
+                                <td>{{siteId}}</td>
+                                <td><a href="/sites/{{id}}">{{siteName}}</a></td>
+                                <td>{{engineer.id}}</td>
+
+
+                            </tr>
+                            </tbody>
+                        {{/each}}
+                    </table>
+                </div>
+            {{else}}
+                <p>No Records</p>
+            {{/if}}
+
+
+            <br>
+            <a href="/sites/new">Add a New engineer</a>
+            <br>
+            <a href="/">Home</a>
+        </div>
         <a href="/">Home</a>
     </div>
-
-    </div>
-
 
 {{/partial}}
 
