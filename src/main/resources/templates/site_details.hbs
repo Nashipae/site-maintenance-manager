@@ -1,54 +1,52 @@
 {{#partial "content"}}
 
+    <div>
+        <h2>Site Details</h2>
+    </div>
+
     {{#if sites}}
-    <p> <h2>Details of {{siteName}}</h2></p>
+        <p>Please find details of site <h4>{{sites.siteName}}</h4>.</p>
+    {{else}}
+        <p>Click <a href="/sites/new">here</a> to add a visitor.</p>
     {{/if}}
 
-
-    {{#if sites}}
-
-{{!--        {{#each}}--}}
-            <div class="table-responsive">
+    <div class="row">
+        <div class="table-responsive">
             <table class="table table-bordered table-dark table-sm">
-
                 <thead>
-                <tr>
+                <tr class="bg-info text-white">
                     <th scope="col">#.</th>
-                    <th scope="col">SITE ID.</th>
+                    <th scope="col">SITE NO.</th>
                     <th scope="col">SITE NAME</th>
-                    <th scope="col">ENGINEER ASSIGNED:</th>
-
+                    <th scope="col">ENGINEER NAME.</th>
 
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr>
+                <tr class="">
 
-                    <td>{{site.id}}</td>
-                    <td>{{site.siteId}}</td>
-                    <td>{{site.siteName}}</td>
-                    <td>{{engineer.name }}</td>
-                    <td>
-                        {{#if sites}}
-                            {{#each sites }}
-                                {{engineerId}}
-                            {{/each}}
-                        {{/if}}
-                    </td>
+                    <td>{{sites.id}}</td>
+                    <td>{{sites.siteId}}</td>
+                    <td>{{sites.siteName}}</td>
+                    <td>{{sites.engineerName}}</td>
+
+
+
                 </tr>
                 </tbody>
-{{!--        {{/each}}--}}
-
-        </table>
+            </table>
 
         </div>
 
+    </div>
 
-    {{else}}
-        <p>No Records</p>
-    {{/if}}
 
+
+
+
+
+    </div>
 
 
 {{/partial}}

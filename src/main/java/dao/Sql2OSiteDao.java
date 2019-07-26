@@ -33,7 +33,7 @@ public class Sql2OSiteDao implements SiteDao {
     @Override
     public List<Site> getAll() {
         try(Connection con =DB.sql2o.open()){
-            return con.createQuery("SELECT siteName FROM sites")
+            return con.createQuery("SELECT * FROM sites")
                     .executeAndFetch(Site.class);
         }
     }

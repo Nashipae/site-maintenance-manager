@@ -104,6 +104,7 @@ public class App {
             model.put("sites", sites);
             List<Engineer> engineers = engineerDao.getAll();
             model.put("engineers", engineers);
+            model.put("sites", sites);
             return new ModelAndView(model, "siteadd-form.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -128,15 +129,37 @@ public class App {
         post("/sites", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Engineer> engineers = engineerDao.getAll();
-            model.put("engineers", engineers);
-            int Id = Integer.parseInt(req.params("id"));
+            List<Site> allSites = siteDao.getAll();
+            model.put("sites", allSites);
+//            int Id = Integer.parseInt(req.params("id"));
             int siteId = Integer.parseInt(req.queryParams("siteId"));
             String siteName = req.queryParams("siteName");
             String siteNumber = req.queryParams("siteId");
             String engineerName = req.queryParams("engineerName");
-            Site newSite = new Site(Id, siteId, siteName , engineerName);
+            Site newSite = new Site(siteId, siteName , engineerName);
             siteDao.add(newSite);
-            res.redirect("/");
+            System.out.println(newSite.getEngineerName());
+            model.put("sites", allSites);
+            res.redirect("/sites/all-sites");
+            return null;
+            }, new HandlebarsTemplateEngine());
+
+        //task: process new site form
+        post("/sites", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Engineer> engineers = engineerDao.getAll();
+            List<Site> allSites = siteDao.getAll();
+            model.put("sites", allSites);
+//            int Id = Integer.parseInt(req.params("id"));
+            int siteId = Integer.parseInt(req.queryParams("siteId"));
+            String siteName = req.queryParams("siteName");
+            String siteNumber = req.queryParams("siteId");
+            String engineerName = req.queryParams("engineerName");
+            Site newSite = new Site(siteId, siteName , engineerName);
+            siteDao.add(newSite);
+            System.out.println(newSite.getEngineerName());
+            model.put("sites", allSites);
+            res.redirect("/sites/all-sites");
             return null;
         }, new HandlebarsTemplateEngine());
 
@@ -151,13 +174,28 @@ public class App {
             return new ModelAndView(model, "all-sites-list.hbs");
         }, new HandlebarsTemplateEngine());
 
-//        Get details of each site
+//
+//        Get details of each engineer
         get("/sites/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfSiteToFind = Integer.parseInt(request.params("id"));
-            Engineer foundSite = engineerDao.findById(idOfSiteToFind);
+            Site foundSite = siteDao.findById(idOfSiteToFind);
             model.put("sites", foundSite);   //add it to model for template to display
             return new ModelAndView(model, "site_details.hbs");  //individual post page.
+        }, new HandlebarsTemplateEngine());
+
+
+        //get: show a site that is assigned to an engineer
+        get("/engineers/:engineerId/sites/:siteId", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfSiteToFind = Integer.parseInt(req.params("siteId"));
+            Site foundSite = siteDao.findById(idOfSiteToFind);
+            int idOfEngineerToFind = Integer.parseInt(req.params("engineerId"));
+            Engineer foundEngineer = engineerDao.findById(idOfEngineerToFind);
+            model.put("sites", foundSite);
+            model.put("engineers", foundEngineer);
+            model.put("engineers", engineerDao.getAll());
+            return new ModelAndView(model, "site_details.hbs");
         }, new HandlebarsTemplateEngine());
 
 
