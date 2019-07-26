@@ -23,13 +23,11 @@ public class App {
         ProcessBuilder process = new ProcessBuilder();
         Integer port;
 
-        // This tells our app that if Heroku sets a port for us, we need to use that port.
-        // Otherwise, if they do not, continue using port 4567.
 
         if (process.environment().get("PORT") != null) {
             port = Integer.parseInt(process.environment().get("PORT"));
         } else {
-            port = 4561;
+            port = 4563;
         }
         port(port);
 
@@ -84,8 +82,8 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             int idOfEngineerToFind = Integer.parseInt(request.params("id"));
             Engineer foundEngineer = engineerDao.findById(idOfEngineerToFind);
-            model.put("engineers", foundEngineer);   //add it to model for template to display
-            return new ModelAndView(model, "engineer_details.hbs");  //individual post page.
+            model.put("engineers", foundEngineer);
+            return new ModelAndView(model, "engineer_details.hbs");
         }, new HandlebarsTemplateEngine());
 
 
@@ -109,21 +107,6 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
-//        process new site form
-//        post("/sites", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            List<Site> allSites = siteDao.getAll();
-//            int siteId = Integer.parseInt(req.queryParams("siteId"));
-//            String siteName = req.queryParams("siteName");
-//            String engineerName = req.queryParams("engineerName");
-////            int engineerId = Integer.parseInt(req.queryParams("engineerId"));
-//            Site newSite = new Site(siteId, siteName , engineerName);
-//            System.out.println(newSite.getEngineerName());
-//            siteDao.add(newSite);
-//            model.put("sites", allSites);
-//            res.redirect("/sites/all-sites");
-//            return null;
-//        }, new HandlebarsTemplateEngine());
 
         //task: process new site form
         post("/sites", (req, res) -> {
@@ -198,6 +181,45 @@ public class App {
             return new ModelAndView(model, "site_details.hbs");
         }, new HandlebarsTemplateEngine());
 
+
+        //get: show a form to update a engineer
+        get("/engineers/:id/edit", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("editEngineer", true);
+            Engineer engineer = engineerDao.findById(Integer.parseInt(req.params("id")));
+            model.put("engineer", engineer);
+            model.put("engineers", engineerDao.getAll());
+            return new ModelAndView(model, "engineer-edit-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //post: update an engineer
+        post("/engineers/:id/edit", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfEngineerToEdit = Integer.parseInt(req.params("id"));
+            String newName = req.queryParams("newName");
+            String newEmpNo = req.queryParams("newEmp_No");
+            String newSiteAllocation = req.queryParams("newSiteAllocation");
+            engineerDao.update(idOfEngineerToEdit, newName, newEmpNo,newSiteAllocation);
+            res.redirect("/engineer/all-engineers");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: delete all engineers and all sites
+        get("/engineers/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            engineerDao.clearAllEngineers();
+            siteDao.clearAllSites();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: delete all sites
+        get("/sites/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            siteDao.clearAllSites();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
     }
 

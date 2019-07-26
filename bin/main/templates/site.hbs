@@ -1,0 +1,29 @@
+{{#partial "content"}}
+
+    <div class="container">
+        <h2>Site name: {{site.name}}</h2>
+        <h3>Site status:  {{site.decommissioned}}</h3>
+        <h3>Belongs to: {{engineer.name}}</h3>
+        <hr>
+
+        <h3>Edit a sites details:</h3>
+
+        <form action="/sites/:id" method="post" class="form-style-2">
+            <label for="name"><scan>Site name</scan></label>
+            <input id="name" name="name" type="text" class=".input-field">
+            <button type="submit" class="btn btn-success">Edit the Sites name</button>
+        </form>
+        <hr>
+
+        <form action="/engineers/$site.getEngineerId()/sites/$site.getId()/delete" method="post" class="form-style-2">
+            <button type="submit" class="btn btn-danger" id="delete-site">Delete Sites name</button>
+        </form>
+
+        <a href="/engineers/$engineer.getId()">Return to $engineer.getName()</a>
+        <br>
+        <a href="/">Home</a>
+
+    </div>
+
+    {{/partial}}
+{{> layout}}
