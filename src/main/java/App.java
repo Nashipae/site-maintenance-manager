@@ -158,7 +158,7 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 //
-//        Get details of each engineer
+//        Get details of each site
         get("/sites/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfSiteToFind = Integer.parseInt(request.params("id"));
@@ -204,22 +204,39 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: delete all engineers and all sites
+        //get: delete all engineers
         get("/engineers/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             engineerDao.clearAllEngineers();
-            siteDao.clearAllSites();
-            res.redirect("/");
-            return null;
+//            siteDao.clearAllSites();
+            return new ModelAndView(model,"delete_success.hbs");
         }, new HandlebarsTemplateEngine());
 
         //get: delete all sites
         get("/sites/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             siteDao.clearAllSites();
-            res.redirect("/");
-            return null;
+            return new ModelAndView(model,"delete_success.hbs");
         }, new HandlebarsTemplateEngine());
+
+        // get: delete a site
+        get("/sites/:id/delete", (req, res)->{
+            Map<String, Object> model = new HashMap<>();
+            int idOfSiteToDelete = Integer.parseInt(req.params("id"));
+            siteDao.deleteById(idOfSiteToDelete);
+            return new ModelAndView(model,"delete_success.hbs");
+        }, new HandlebarsTemplateEngine ());
+
+
+
+        // get: delete an engineer
+        get("/engineers/:id/delete", (req, res) -> {
+            Map<String, Object> model=new HashMap<>();
+            int idOfEngineerToDelete=Integer.parseInt(req.params("id"));
+            engineerDao.deleteById(idOfEngineerToDelete);
+            return new ModelAndView(model,"delete_success.hbs");
+        }, new HandlebarsTemplateEngine());
+
 
     }
 
